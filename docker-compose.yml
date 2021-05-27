@@ -1,0 +1,40 @@
+services:
+#  client:
+#    build: ./client/Dockerfile
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      - type: bind
+#        source: ./client
+#        target: /app
+  api:
+    build: .
+    networks:
+      test_lbc_network:
+    ports:
+      - "4000:4000"
+    volumes:
+      - type: bind
+        source: .
+        target: /go/src/github.com/Bastorx
+      - /client/
+  db:
+    image: mysql:8.0
+    restart: always
+    networks:
+      test_lbc_network:
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: test_lbc_user
+      MYSQL_PASSWORD: test_lbc_pwd
+      MYSQL_DATABASE: test_lbc
+    volumes:
+      - dbdata:/var/lib/mysql
+
+networks:
+  test_lbc_network:
+
+volumes:
+  dbdata:
