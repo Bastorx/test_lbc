@@ -9,5 +9,8 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.Run(":4000")
+	err := r.Run(":4000")
+	if err != nil {
+		return 
+	}
 }

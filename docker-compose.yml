@@ -1,12 +1,14 @@
+version: "3"
 services:
-#  client:
-#    build: ./client/Dockerfile
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - type: bind
-#        source: ./client
-#        target: /app
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: ./client
+        target: /app
+      - ./client/node_modules
   api:
     build: .
     networks:
